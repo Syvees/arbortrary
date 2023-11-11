@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Arbortrary</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Arbortrary</h3>
+            </div>
+            <div class="col">
+                <h4>Welcome, {{session["logged_in_first_name"]}}!</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>A site to track randomly planted trees</p>
+            </div>
+            <div class="col">
+                <a href="/dashboard" style="margin-right: 40px;">Dashboard</a>
+                <a href="/logout">Logout</a> 
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h2>Manage My Trees {{one_account.trees_list}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Date Planted</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in one_account %}
+                    <tr>
+                        <td>{{row.trees_list.species}}</td>
+                        <td>{{row.trees_list.planted_date}}</td>
+                        <td><a href="/delete/{{row.trees_list.id}}">delete</a><a href="/edit/{{row.trees_list.id}}">edit</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

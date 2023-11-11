@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Arbortrary</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Arbortrary</h3>
+            </div>
+            <div class="col">
+                <h4>Welcome, {{session["logged_in_first_name"]}}!</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>A site to track randomly planted trees</p>
+            </div>
+            <div class="col">
+                <a href="/user/account" style="margin-right: 40px;">My Trees</a> 
+                <a href="/dashboard" style="margin-right: 40px;">Dashboard</a>
+                <a href="/logout">Logout</a> 
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h2>{{one_tree.species}} planted by {{one_tree.planter.first_name}} {{one_tree.planter.last_name}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Where: {{one_tree.location}}</p>
+                <p>When: {{one_tree.planted_date}}</p>
+                <p>Reason: {{one_tree.reason}}</p>
+            </div>
+            <div class="col" style="margin-top: 10px;">
+                <p>Visited By:</p>
+                {% for row in tree_visitors.visitors %}
+                <p>{{row.first_name}} {{row.last_name}}</p>
+                {% endfor %}
+                <br>
+                <a href="/add/visit/{{tree_visitors.id}}">Did you visit this tree?</a> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>
